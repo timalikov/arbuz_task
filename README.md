@@ -1,4 +1,7 @@
 # arbuz_task
+
+Greetings, ARBUZ people! I am thrilled to share my work with you.
+
 Used PHP 8.2.6 along with PostgreSQL for database storage.
 
 Relational Database Diagram:
