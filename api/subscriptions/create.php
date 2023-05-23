@@ -9,14 +9,25 @@
   $customer_id = $customer_idd;
 
 
-	$delivery_day = $_POST['delivery_day'];
-	$delivery_period = $_POST['delivery_period'];
-	$delivery_frequency = $_POST['delivery_frequency'];
-  $subscription_duration = $_POST['subscription_duration'];
-  $address = $_POST['address'];
-  $phone_number = $_POST['phone'];
-
-
+  if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delivery_day'])) {
+    // POST request from HTML form
+    $delivery_day = $_POST['delivery_day'];
+    $delivery_period = $_POST['delivery_period'];
+    $delivery_frequency = $_POST['delivery_frequency'];
+    $subscription_duration = $_POST['subscription_duration'];
+    $address = $_POST['address'];
+    $phone_number = $_POST['phone'];
+  } else {
+    // Raw JSON data sent
+    $data = json_decode(file_get_contents("php://input"));
+    $delivery_day = $data->delivery_day;
+    $delivery_period = $data->delivery_period;
+    $delivery_frequency = $data->delivery_frequency;
+    $subscription_duration = $data->subscription_duration;
+    $address = $data->address;
+    $phone_number = $data->phone_number;
+  }
+  
 
 // Database connection
   $database = new Database();
