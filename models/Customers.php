@@ -63,23 +63,35 @@
 
     // Create Post
     public function create() {
-          // Create query
-          $query = 'INSERT INTO ' . $this->table . ' SET title = :title, body = :body, author = :author, category_id = :category_id';
+          // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+          //   // Get the data from the POST request body
+          //   $name = $_POST['name'];
+          //   $email = $_POST['email'];
+          //   $address = $_POST['address'];
+          //   $phone = $_POST['phone'];
+        
+          //   // Insert the data into the table
+          //   $query = "INSERT INTO cutomers (name, email, address, phone) VALUES (?, ?, ?, ?)";
+          //   $stmt = $pdo->prepare($query);
+          //   $stmt->execute([$name, $email, $address, $phone]);
+    
+      // Create query
+          $query = 'INSERT INTO ' . $this->table . ' (name, email, address, phone) VALUES (:name, :email, :address, :phone)';
 
           // Prepare statement
           $stmt = $this->conn->prepare($query);
 
           // Clean data
-          $this->title = htmlspecialchars(strip_tags($this->title));
-          $this->body = htmlspecialchars(strip_tags($this->body));
-          $this->author = htmlspecialchars(strip_tags($this->author));
-          $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+          $this->name = htmlspecialchars(strip_tags($this->name));
+          $this->email = htmlspecialchars(strip_tags($this->email));
+          $this->address = htmlspecialchars(strip_tags($this->address));
+          $this->phone = htmlspecialchars(strip_tags($this->phone));
 
           // Bind data
-          $stmt->bindParam(':title', $this->title);
-          $stmt->bindParam(':body', $this->body);
-          $stmt->bindParam(':author', $this->author);
-          $stmt->bindParam(':category_id', $this->category_id);
+          $stmt->bindParam(':name', $this->name);
+          $stmt->bindParam(':email', $this->email);
+          $stmt->bindParam(':address', $this->address);
+          $stmt->bindParam(':phone', $this->phone);
 
           // Execute query
           if($stmt->execute()) {
@@ -96,24 +108,24 @@
     public function update() {
           // Create query
           $query = 'UPDATE ' . $this->table . '
-                                SET title = :title, body = :body, author = :author, category_id = :category_id
+                                SET name = :name, email = :email, address = :address, phone = :phone
                                 WHERE id = :id';
 
           // Prepare statement
           $stmt = $this->conn->prepare($query);
 
           // Clean data
-          $this->title = htmlspecialchars(strip_tags($this->title));
-          $this->body = htmlspecialchars(strip_tags($this->body));
-          $this->author = htmlspecialchars(strip_tags($this->author));
-          $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+          $this->name = htmlspecialchars(strip_tags($this->name));
+          $this->email = htmlspecialchars(strip_tags($this->email));
+          $this->address = htmlspecialchars(strip_tags($this->address));
+          $this->phone = htmlspecialchars(strip_tags($this->phone));
           $this->id = htmlspecialchars(strip_tags($this->id));
 
           // Bind data
-          $stmt->bindParam(':title', $this->title);
-          $stmt->bindParam(':body', $this->body);
-          $stmt->bindParam(':author', $this->author);
-          $stmt->bindParam(':category_id', $this->category_id);
+          $stmt->bindParam(':name', $this->name);
+          $stmt->bindParam(':email', $this->email);
+          $stmt->bindParam(':address', $this->address);
+          $stmt->bindParam(':phone', $this->phone);
           $stmt->bindParam(':id', $this->id);
 
           // Execute query
